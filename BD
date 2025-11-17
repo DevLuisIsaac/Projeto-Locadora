@@ -1,0 +1,30 @@
+create database Locadora;
+use database Locadora;
+
+ create table Cliente(
+     idcliente int auto_increment not null primary key,
+     nome varchar(100) not null,
+     telefone varchar(20) not null,
+     datanasc date,
+     cpf varchar(12) not null,
+     rg varchar(20) not null,
+     logradouro varchar(255) not null,
+     renda decimal(10,2) not null,
+     conjuge varchar(255));
+
+create table veiculo(
+     placa varchar(7) unique not null primary key,
+     modelo varchar(30) not null,
+     cor varchar(20) not null,
+     tipo varchar(255) not null,
+     ano date not null);
+
+create table reserva(
+     idreserva int auto_increment not null primary key,
+     inicio date not null,
+     fim date not null,
+     valor decimal(10, 2) not null,
+     FKCliente int,
+     FKPlaca varchar(7) unique,
+     foreign key (FKCliente) references cliente(idcliente),
+     foreign key (FKPlaca) references veiculo(placa));
